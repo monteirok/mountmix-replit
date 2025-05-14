@@ -104,4 +104,17 @@ export const insertUserSchema = createInsertSchema(users).pick({
 });
 
 export type InsertUser = z.infer<typeof insertUserSchema>;
+// Email notifications table
+export const emailNotifications = pgTable("email_notifications", {
+  id: serial("id").primaryKey(),
+  to: text("to").notNull(),
+  subject: text("subject").notNull(),
+  content: text("content").notNull(),
+  sentAt: timestamp("sent_at").defaultNow(),
+  type: text("type").notNull(), // 'booking' or 'contact'
+  sourceId: integer("source_id").notNull(), // ID of the booking or contact message
+});
+
 export type User = typeof users.$inferSelect;
+export type EmailNotification = typeof emailNotifications.$inferSelect;
+export type InsertEmailNotification = typeof emailNotifications.$inferInsert;
