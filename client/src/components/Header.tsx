@@ -66,7 +66,7 @@ const Header = () => {
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center">
           {/* {["Cocktails", "Services", "Packages", "Contact"].map((item, index) => ( */}
-          {["Cocktails", "Services", "Contact"].map((item, index) => (
+          {["About", "Cocktails", "Services", "Contact"].map((item, index) => (
             <motion.a
               key={item}
               href={`#${item.toLowerCase()}`}
@@ -142,7 +142,6 @@ const Header = () => {
                 { name: "About", icon: "✨" },
                 { name: "Services", icon: "🍸" },
                 { name: "Cocktails", icon: "🌿" },
-                { name: "Gallery", icon: "📸" },
                 { name: "Contact", icon: "📩" },
               ].map((item) => (
                 <motion.a
