@@ -1,3 +1,5 @@
+import { eq } from 'drizzle-orm';
+import { db } from './db';
 import { 
   users, 
   type User, 
@@ -40,26 +42,8 @@ export interface IStorage {
 }
 
 // In-memory storage implementation
-export class MemStorage implements IStorage {
-  private users: Map<number, User>;
-  private bookingsStore: Map<number, Booking>;
-  private contactMessagesStore: Map<number, ContactMessage>;
-  private cocktailsStore: Map<number, Cocktail>;
-  private userCurrentId: number;
-  private bookingCurrentId: number;
-  private messageCurrentId: number;
-  private cocktailCurrentId: number;
-
+export class DbStorage implements IStorage {
   constructor() {
-    this.users = new Map();
-    this.bookingsStore = new Map();
-    this.contactMessagesStore = new Map();
-    this.cocktailsStore = new Map();
-    this.userCurrentId = 1;
-    this.bookingCurrentId = 1;
-    this.messageCurrentId = 1;
-    this.cocktailCurrentId = 1;
-
     // Initialize with sample cocktails
     this.initializeCocktails();
   }
@@ -84,15 +68,12 @@ export class MemStorage implements IStorage {
 
   // Booking methods
   async getBooking(id: number): Promise<Booking | undefined> {
-    return this.bookingsStore.get(id);
+    const result = await db.select().from(bookings).where(eq(bookings.id, id));
+    return result[0];
   }
 
   async createBooking(insertBooking: InsertBooking): Promise<Booking> {
-    const id = this.bookingCurrentId++;
-    const createdAt = new Date();
-    const status = "pending";
-    const booking: Booking = { ...insertBooking, id, createdAt, status };
-    this.bookingsStore.set(id, booking);
+    const [booking] = await db.insert(bookings).values(insertBooking).returning();
     await this.sendEmail({
         to: 'mountainmixologyca@gmail.com',
         subject: 'New Booking Inquiry',
@@ -118,15 +99,12 @@ export class MemStorage implements IStorage {
 
   // Contact message methods
   async getContactMessage(id: number): Promise<ContactMessage | undefined> {
-    return this.contactMessagesStore.get(id);
+    const result = await db.select().from(contactMessages).where(eq(contactMessages.id, id));
+    return result[0];
   }
 
   async createContactMessage(insertMessage: InsertContactMessage): Promise<ContactMessage> {
-    const id = this.messageCurrentId++;
-    const createdAt = new Date();
-    const isRead = false;
-    const message: ContactMessage = { ...insertMessage, id, createdAt, isRead };
-    this.contactMessagesStore.set(id, message);
+    const [message] = await db.insert(contactMessages).values(insertMessage).returning();
     await this.sendEmail({
         to: 'mountainmixologyca@gmail.com',
         subject: 'New Contact Message',
@@ -246,4 +224,4 @@ export class MemStorage implements IStorage {
   }
 }
 
-export const storage = new MemStorage();
+export const storage = new DbStorage();

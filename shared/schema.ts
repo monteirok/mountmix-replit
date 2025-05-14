@@ -116,5 +116,37 @@ export const emailNotifications = pgTable("email_notifications", {
 });
 
 export type User = typeof users.$inferSelect;
+// Bookings table
+export const bookings = pgTable("bookings", {
+  id: serial("id").primaryKey(),
+  firstName: text("first_name").notNull(),
+  lastName: text("last_name").notNull(),
+  email: text("email").notNull(),
+  phone: text("phone").notNull(),
+  eventDate: text("event_date").notNull(),
+  eventTime: text("event_time").notNull(),
+  eventType: text("event_type").notNull(),
+  packageType: text("package_type").notNull(),
+  guestCount: integer("guest_count").notNull(),
+  message: text("message"),
+  status: text("status").default("pending"),
+  createdAt: timestamp("created_at").defaultNow()
+});
+
+// Contact messages table
+export const contactMessages = pgTable("contact_messages", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  email: text("email").notNull(),
+  subject: text("subject").notNull(),
+  message: text("message").notNull(),
+  isRead: boolean("is_read").default(false),
+  createdAt: timestamp("created_at").defaultNow()
+});
+
 export type EmailNotification = typeof emailNotifications.$inferSelect;
 export type InsertEmailNotification = typeof emailNotifications.$inferInsert;
+export type Booking = typeof bookings.$inferSelect;
+export type InsertBooking = typeof bookings.$inferInsert;
+export type ContactMessage = typeof contactMessages.$inferSelect;
+export type InsertContactMessage = typeof contactMessages.$inferInsert;
