@@ -1,0 +1,242 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* 2025 Trendy Color Palette */
+    --background: 220 20% 98%; /* Light blue-tinted background */
+    --foreground: 210 30% 12%; /* Deep blue-gray */
+    --muted: 220 15% 95%;
+    --muted-foreground: 220 10% 40%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 30% 12%;
+    --card: 0 0% 100%;
+    --card-foreground: 210 30% 12%;
+    --border: 220 20% 90%;
+    --input: 220 20% 90%;
+    
+    /* Modern primary color - Deep Mountain Blue */
+    --primary: 213 42% 18%; /* #152F4E */
+    --primary-foreground: 210 40% 98%;
+    
+    /* Vibrant accent - Golden Amber */
+    --secondary: 36 80% 58%; /* #EBB146 - a more vibrant gold */
+    --secondary-foreground: 210 40% 98%;
+    
+    /* Accent color - Alpine Burgundy */
+    --accent: 350 80% 30%; /* More modern burgundy */
+    --accent-foreground: 0 0% 98%;
+    
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 60 9.1% 97.8%;
+    --ring: 210 30% 40%;
+    --radius: 1rem; /* More rounded corners for 2025 style */
+
+    /* Chart colors updated for vibrant data visualization */
+    --chart-1: 36 80% 58%;
+    --chart-2: 350 80% 30%;
+    --chart-3: 213 42% 18%;
+    --chart-4: 180 60% 45%;
+    --chart-5: 270 60% 60%;
+  }
+
+  .dark {
+    /* 2025 Dark Mode - Modern and sophisticated */
+    --background: 213 35% 9%; /* Deep blue-gray background */
+    --foreground: 210 40% 98%;
+    --muted: 213 30% 15%;
+    --muted-foreground: 210 20% 70%;
+    --popover: 213 35% 9%;
+    --popover-foreground: 210 40% 98%;
+    --card: 213 35% 12%;
+    --card-foreground: 210 40% 98%;
+    --border: 213 30% 20%;
+    --input: 213 30% 20%;
+    
+    /* Night Mountain Blue */
+    --primary: 213 30% 65%; /* Lighter blue for dark mode */
+    --primary-foreground: 213 35% 9%;
+    
+    /* Glowing gold */
+    --secondary: 36 90% 65%; /* Brighter gold for dark mode */
+    --secondary-foreground: 213 35% 9%;
+    
+    /* Nighttime burgundy */
+    --accent: 350 70% 45%;
+    --accent-foreground: 210 40% 98%;
+    
+    --destructive: 0 62.8% 50%;
+    --destructive-foreground: 210 40% 98%;
+    --ring: 213 70% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply antialiased bg-background text-foreground font-['Inter',_'Montserrat',_sans-serif] overflow-x-hidden;
+    scroll-behavior: smooth;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-['Playfair_Display',_serif] font-bold text-primary;
+    letter-spacing: -0.025em; /* Tighter letter spacing for 2025 typography trends */
+  }
+  
+  h1 {
+    @apply text-4xl md:text-6xl lg:text-7xl tracking-tighter leading-[1.1];
+  }
+  
+  h2 {
+    @apply text-3xl md:text-5xl tracking-tight leading-tight;
+  }
+
+  /* Smooth scrolling for the whole page */
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer components {
+  /* 2025 Glass Morphism Effect */
+  .glass {
+    @apply bg-white bg-opacity-10 backdrop-blur-lg border border-white border-opacity-20 shadow-xl;
+  }
+  
+  .glass-dark {
+    @apply bg-primary bg-opacity-20 backdrop-blur-lg border border-primary border-opacity-10 shadow-xl;
+  }
+  
+  /* 2025 Neomorphic Effects */
+  .neomorphic {
+    @apply bg-background rounded-2xl shadow-[6px_6px_12px_rgba(0,0,0,0.1),-6px_-6px_12px_rgba(255,255,255,0.8)];
+  }
+  
+  .neomorphic-dark {
+    @apply bg-primary rounded-2xl shadow-[6px_6px_12px_rgba(0,0,0,0.3),-6px_-6px_12px_rgba(255,255,255,0.05)];
+  }
+  
+  /* 2025 Vibrant Gradients */
+  .gradient-primary {
+    @apply bg-gradient-to-r from-primary to-accent;
+  }
+  
+  .gradient-secondary {
+    @apply bg-gradient-to-r from-secondary via-amber-500 to-yellow-400;
+  }
+  
+  /* 2025 Border Glow Effect */
+  .border-glow {
+    @apply border border-secondary shadow-[0_0_15px_rgba(235,177,70,0.5)];
+  }
+  
+  /* Enhanced Parallax */
+  .parallax {
+    @apply bg-fixed bg-center bg-no-repeat bg-cover;
+    transform-style: preserve-3d;
+  }
+
+  /* Modern Underline Styles */
+  .gold-underline {
+    @apply relative;
+  }
+
+  .gold-underline::after {
+    content: '';
+    @apply block w-[100px] h-[3px] bg-gradient-to-r from-secondary to-amber-400 mx-auto mt-4 rounded-full;
+  }
+
+  .left-underline::after {
+    @apply ml-0;
+  }
+
+  /* Enhanced Navbar Link Animations */
+  .navbar-link {
+    @apply relative px-1 py-1;
+  }
+
+  .navbar-link::after {
+    content: '';
+    @apply absolute w-0 h-[3px] rounded-full bottom-[-2px] left-0 bg-gradient-to-r from-secondary to-amber-400 transition-all duration-300 ease-in-out;
+  }
+
+  .navbar-link:hover::after {
+    @apply w-full;
+  }
+
+  /* Card Hover Effects with 2025 Design Trends */
+  .cocktail-card, .package-card {
+    @apply transition-all duration-500 rounded-xl overflow-hidden;
+  }
+
+  .cocktail-card:hover, .package-card:hover {
+    @apply transform -translate-y-2 shadow-2xl scale-[1.02];
+  }
+  
+  /* 3D Hover Effect */
+  .hover-3d {
+    @apply transition-all duration-300;
+    transform-style: preserve-3d;
+  }
+  
+  .hover-3d:hover {
+    transform: perspective(1000px) rotateX(5deg) rotateY(5deg) scale3d(1.05, 1.05, 1.05);
+  }
+
+  /* Button Styles for 2025 */
+  .btn-primary {
+    @apply transition-all duration-300 rounded-xl relative overflow-hidden;
+  }
+
+  .btn-primary:hover {
+    @apply transform -translate-y-1 shadow-lg;
+  }
+  
+  .btn-primary::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-secondary to-amber-400 opacity-0 transition-opacity duration-300 z-[-1];
+  }
+  
+  .btn-primary:hover::before {
+    @apply opacity-100;
+  }
+
+  /* Standardized padding */
+  .p-standard {
+    @apply p-8;
+  }
+  
+  /* 2025 Animation Classes */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .animate-pulse-subtle {
+    animation: pulse-subtle 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  /* Animation Keyframes */
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-15px);
+    }
+  }
+  
+  @keyframes pulse-subtle {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.85;
+    }
+  }
+}

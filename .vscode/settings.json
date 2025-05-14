@@ -1,0 +1,28 @@
+{
+    "workbench.colorCustomizations": {
+        "[Material Theme Darker]": {},
+        "[Material Theme Ocean High Contrast]": {},
+        "minimap.background": "#2fa6a710",
+        "scrollbar.shadow": "#2fa6a710",
+        "terminal.background": "#151718",
+        "terminal.foreground": "#D6D6D6",
+        "terminalCursor.background": "#D6D6D6",
+        "terminalCursor.foreground": "#D6D6D6",
+        "terminal.ansiBlack": "#151718",
+        "terminal.ansiBlue": "#55B5DB",
+        "terminal.ansiBrightBlack": "#41535B",
+        "terminal.ansiBrightBlue": "#55B5DB",
+        "terminal.ansiBrightCyan": "#55DBBE",
+        "terminal.ansiBrightGreen": "#9FCA56",
+        "terminal.ansiBrightMagenta": "#A074C4",
+        "terminal.ansiBrightRed": "#CD3F45",
+        "terminal.ansiBrightWhite": "#FFFFFF",
+        "terminal.ansiBrightYellow": "#E6CD69",
+        "terminal.ansiCyan": "#55DBBE",
+        "terminal.ansiGreen": "#9FCA56",
+        "terminal.ansiMagenta": "#A074C4",
+        "terminal.ansiRed": "#CD3F45",
+        "terminal.ansiWhite": "#D6D6D6",
+        "terminal.ansiYellow": "#E6CD69"
+    }
+}
