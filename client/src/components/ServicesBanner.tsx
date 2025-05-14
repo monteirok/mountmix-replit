@@ -38,7 +38,7 @@ const services = [
 
 const ServicesBanner = () => {
   return (
-    <section className="py-20 bg-primary">
+    <section id="services" className="py-20 bg-primary">
       <div className="container mx-auto px-6">
         <motion.div 
           className="text-center mb-16"
