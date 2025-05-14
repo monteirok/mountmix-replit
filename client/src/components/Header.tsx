@@ -118,34 +118,40 @@ const Header = () => {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.nav
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="bg-white/95 dark:bg-primary/95 backdrop-blur-md py-4 px-6 md:hidden overflow-hidden shadow-lg"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-x-0 top-[72px] bg-white/95 dark:bg-primary/95 backdrop-blur-md py-6 px-6 md:hidden overflow-hidden shadow-lg border-t border-gray-100 dark:border-gray-800"
           >
             <motion.div
-              className="flex flex-col space-y-4"
+              className="flex flex-col space-y-5"
               variants={{
                 hidden: { opacity: 0 },
                 show: {
                   opacity: 1,
                   transition: {
-                    staggerChildren: 0.1,
+                    staggerChildren: 0.05,
                   },
                 },
               }}
               initial="hidden"
               animate="show"
             >
-              {["Cocktails", "Services", "Contact"].map((item) => (
+              {[
+                { name: "About", icon: "✨" },
+                { name: "Services", icon: "🍸" },
+                { name: "Cocktails", icon: "🌿" },
+                { name: "Gallery", icon: "📸" },
+                { name: "Contact", icon: "📩" },
+              ].map((item) => (
                 <motion.a
-                  key={item}
-                  href={`#${item.toLowerCase()}`}
-                  className="text-foreground/90 hover:text-foreground hover:pl-2 transition-all duration-300 py-2 border-b border-gray-100 dark:border-gray-800"
+                  key={item.name}
+                  href={`#${item.name.toLowerCase()}`}
+                  className="flex items-center space-x-3 text-foreground/90 hover:text-foreground py-2 px-3 rounded-lg hover:bg-secondary/5 transition-all duration-200"
                   onClick={(e) => {
                     e.preventDefault();
-                    const targetElement = document.querySelector(`#${item.toLowerCase()}`);
+                    const targetElement = document.querySelector(`#${item.name.toLowerCase()}`);
                     if (targetElement) {
                       closeMobileMenu();
                       window.scrollTo({
@@ -160,23 +166,30 @@ const Header = () => {
                   }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  {item}
+                  <span className="text-lg">{item.icon}</span>
+                  <span className="font-medium">{item.name}</span>
                 </motion.a>
               ))}
-              <motion.button
-                className="bg-gradient-to-r from-secondary to-amber-500 text-white font-medium py-3 px-6 rounded-full shadow-md mt-2"
-                onClick={() => {
-                  closeMobileMenu();
-                  openModal();
-                }}
+              
+              <motion.div
                 variants={{
                   hidden: { opacity: 0, x: -20 },
                   show: { opacity: 1, x: 0 },
                 }}
-                whileTap={{ scale: 0.98 }}
+                className="pt-2"
               >
-                Book Now
-              </motion.button>
+                <motion.button
+                  onClick={() => {
+                    closeMobileMenu();
+                    openModal();
+                  }}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full bg-gradient-to-r from-secondary to-amber-500 text-white font-medium py-3 px-6 rounded-lg shadow-md"
+                >
+                  Book Your Event
+                </motion.button>
+              </motion.div>
             </motion.div>
           </motion.nav>
         )}
