@@ -66,27 +66,31 @@ const Header = () => {
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center">
           {/* {["Cocktails", "Services", "Packages", "Contact"].map((item, index) => ( */}
-          {["About", "Cocktails", "Services", "Gallery", "Contact"].map((item, index) => (
+          {["About", "Cocktails", "Services", "Contact"].map((item, index) => (
             <motion.a
               key={item}
               href={`#${item.toLowerCase()}`}
               onClick={(e) => {
                 e.preventDefault();
-                const targetElement = document.querySelector(`#${item.toLowerCase()}`);
+                const targetElement = document.querySelector(
+                  `#${item.toLowerCase()}`,
+                );
                 if (targetElement) {
                   window.scrollTo({
                     top: targetElement.offsetTop - 80,
-                    behavior: 'smooth'
+                    behavior: "smooth",
                   });
                 }
               }}
               onClick={(e) => {
                 e.preventDefault();
-                const targetElement = document.querySelector(`#${item.toLowerCase()}`);
+                const targetElement = document.querySelector(
+                  `#${item.toLowerCase()}`,
+                );
                 if (targetElement) {
                   window.scrollTo({
                     top: targetElement.offsetTop - 80,
-                    behavior: 'smooth'
+                    behavior: "smooth",
                   });
                 }
               }}
@@ -152,7 +156,6 @@ const Header = () => {
                 { name: "About", icon: "✨" },
                 { name: "Services", icon: "🍸" },
                 { name: "Cocktails", icon: "🌿" },
-                { name: "Gallery", icon: "📸" },
                 { name: "Contact", icon: "📩" },
               ].map((item) => (
                 <motion.a
@@ -161,12 +164,14 @@ const Header = () => {
                   className="flex items-center space-x-3 text-foreground/90 hover:text-foreground py-2 px-3 rounded-lg hover:bg-secondary/5 transition-all duration-200"
                   onClick={(e) => {
                     e.preventDefault();
-                    const targetElement = document.querySelector(`#${item.name.toLowerCase()}`);
+                    const targetElement = document.querySelector(
+                      `#${item.name.toLowerCase()}`,
+                    );
                     if (targetElement) {
                       closeMobileMenu();
                       window.scrollTo({
                         top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
+                        behavior: "smooth",
                       });
                     }
                   }}
@@ -180,7 +185,7 @@ const Header = () => {
                   <span className="font-medium">{item.name}</span>
                 </motion.a>
               ))}
-              
+
               <motion.div
                 variants={{
                   hidden: { opacity: 0, x: -20 },
