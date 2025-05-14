@@ -80,6 +80,16 @@ const Header = () => {
                   });
                 }
               }}
+              onClick={(e) => {
+                e.preventDefault();
+                const targetElement = document.querySelector(`#${item.toLowerCase()}`);
+                if (targetElement) {
+                  window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                  });
+                }
+              }}
               className={`navbar-link relative px-[.6rem] lg:px-4 py-2 ${isScrolled ? "text-foreground/90 hover:text-foreground" : "text-white hover:text-white/90"} transition-colors duration-300 rounded-full hover:bg-secondary/10`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
