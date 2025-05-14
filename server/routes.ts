@@ -50,6 +50,26 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const bookingData = insertBookingSchema.parse(req.body);
       const booking = await storage.createBooking(bookingData);
+      
+      // Send email notification
+      await storage.sendEmail({
+        to: "mountainmixologyca@gmail.com",
+        subject: `New Booking Request - ${bookingData.eventType}`,
+        text: `
+New booking request received:
+
+Name: ${bookingData.firstName} ${bookingData.lastName}
+Email: ${bookingData.email}
+Phone: ${bookingData.phone}
+Event Date: ${bookingData.eventDate}
+Event Time: ${bookingData.eventTime}
+Event Type: ${bookingData.eventType}
+Package: ${bookingData.packageType}
+Guest Count: ${bookingData.guestCount}
+Message: ${bookingData.message}
+        `
+      });
+
       res.status(201).json(booking);
     } catch (error) {
       if (error instanceof z.ZodError) {
@@ -68,6 +88,21 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const messageData = insertContactSchema.parse(req.body);
       const message = await storage.createContactMessage(messageData);
+
+      // Send email notification
+      await storage.sendEmail({
+        to: "mountainmixologyca@gmail.com",
+        subject: `New Contact Message - ${messageData.subject}`,
+        text: `
+New contact message received:
+
+Name: ${messageData.name}
+Email: ${messageData.email}
+Subject: ${messageData.subject}
+Message: ${messageData.message}
+        `
+      });
+
       res.status(201).json(message);
     } catch (error) {
       if (error instanceof z.ZodError) {

@@ -93,6 +93,11 @@ export class MemStorage implements IStorage {
     const status = "pending";
     const booking: Booking = { ...insertBooking, id, createdAt, status };
     this.bookingsStore.set(id, booking);
+    this.sendEmail({
+        to: 'mountainmixologyca@gmail.com',
+        subject: 'New Booking Inquiry',
+        text: `New booking with the following details: ${JSON.stringify(booking)}`
+    });
     return booking;
   }
 
@@ -120,6 +125,11 @@ export class MemStorage implements IStorage {
     const isRead = false;
     const message: ContactMessage = { ...insertMessage, id, createdAt, isRead };
     this.contactMessagesStore.set(id, message);
+    this.sendEmail({
+        to: 'mountainmixologyca@gmail.com',
+        subject: 'New Contact Message',
+        text: `New contact message with the following details: ${JSON.stringify(message)}`
+    });
     return message;
   }
 
@@ -156,6 +166,15 @@ export class MemStorage implements IStorage {
     return Array.from(this.cocktailsStore.values()).filter(
       (cocktail) => cocktail.featured
     );
+  }
+
+  private async sendEmail({ to, subject, text }: { to: string; subject: string; text: string }) {
+    // For now this is just logging the email content
+    // You'll need to set up a proper email service
+    console.log(`Email would be sent to: ${to}`);
+    console.log(`Subject: ${subject}`);
+    console.log(`Content: ${text}`);
+    return true;
   }
 
   // Initialize with sample cocktails
