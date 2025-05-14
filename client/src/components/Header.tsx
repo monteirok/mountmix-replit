@@ -65,7 +65,7 @@ const Header = () => {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center">
-          {["Cocktails", "Packages", "Contact"].map((item, index) => (
+          {["Services", "Cocktails", "Packages", "Contact"].map((item, index) => (
             <motion.a
               key={item}
               href={`#${item.toLowerCase()}`}
