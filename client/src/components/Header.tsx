@@ -133,7 +133,17 @@ const Header = () => {
                   key={item}
                   href={`#${item.toLowerCase()}`}
                   className="text-foreground/90 hover:text-foreground hover:pl-2 transition-all duration-300 py-2 border-b border-gray-100 dark:border-gray-800"
-                  onClick={closeMobileMenu}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const targetElement = document.querySelector(`#${item.toLowerCase()}`);
+                    if (targetElement) {
+                      closeMobileMenu();
+                      window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                      });
+                    }
+                  }}
                   variants={{
                     hidden: { opacity: 0, x: -20 },
                     show: { opacity: 1, x: 0 },
