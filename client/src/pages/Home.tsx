@@ -30,7 +30,7 @@ const Home = () => {
         <ParallaxBanner />
         <SignatureCocktails />
         <ServicesBanner />
-        <PackageOptions />
+        {/* <PackageOptions /> */}
         <Gallery />
         <Testimonials />
         <BookingCTA />

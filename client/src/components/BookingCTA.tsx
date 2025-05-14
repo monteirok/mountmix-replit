@@ -46,9 +46,9 @@ const BookingCTA = () => {
               <div className="flex flex-col gap-4 w-full max-w-md">
                 <Button
                   onClick={openModal}
-                  className="bg-secondary hover:bg-opacity-90 text-white font-medium py-6 px-8 rounded-sm transition-all duration-300 shadow-lg hover:shadow-xl text-lg"
+                  className="bg-secondary hover:bg-opacity-90 text-white font-medium py-6 px-8 rounded-sm transition-all duration-300 shadow-lg hover:shadow-xl text-xl"
                 >
-                  Open Booking Form
+                  Book Now
                 </Button>
                 
                 <p className="text-sm text-gray-500 font-body italic text-center">
