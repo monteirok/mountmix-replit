@@ -1,5 +1,3 @@
-import { eq } from 'drizzle-orm';
-import { db } from './db';
 import { 
   users, 
   type User, 
@@ -42,8 +40,26 @@ export interface IStorage {
 }
 
 // In-memory storage implementation
-export class DbStorage implements IStorage {
+export class MemStorage implements IStorage {
+  private users: Map<number, User>;
+  private bookingsStore: Map<number, Booking>;
+  private contactMessagesStore: Map<number, ContactMessage>;
+  private cocktailsStore: Map<number, Cocktail>;
+  private userCurrentId: number;
+  private bookingCurrentId: number;
+  private messageCurrentId: number;
+  private cocktailCurrentId: number;
+
   constructor() {
+    this.users = new Map();
+    this.bookingsStore = new Map();
+    this.contactMessagesStore = new Map();
+    this.cocktailsStore = new Map();
+    this.userCurrentId = 1;
+    this.bookingCurrentId = 1;
+    this.messageCurrentId = 1;
+    this.cocktailCurrentId = 1;
+
     // Initialize with sample cocktails
     this.initializeCocktails();
   }
@@ -68,18 +84,19 @@ export class DbStorage implements IStorage {
 
   // Booking methods
   async getBooking(id: number): Promise<Booking | undefined> {
-    const result = await db.select().from(bookings).where(eq(bookings.id, id));
-    return result[0];
+    return this.bookingsStore.get(id);
   }
 
   async createBooking(insertBooking: InsertBooking): Promise<Booking> {
-    const [booking] = await db.insert(bookings).values(insertBooking).returning();
-    await this.sendEmail({
+    const id = this.bookingCurrentId++;
+    const createdAt = new Date();
+    const status = "pending";
+    const booking: Booking = { ...insertBooking, id, createdAt, status };
+    this.bookingsStore.set(id, booking);
+    this.sendEmail({
         to: 'mountainmixologyca@gmail.com',
         subject: 'New Booking Inquiry',
-        text: `New booking with the following details: ${JSON.stringify(booking)}`,
-        type: 'booking',
-        sourceId: booking.id
+        text: `New booking with the following details: ${JSON.stringify(booking)}`
     });
     return booking;
   }
@@ -99,18 +116,19 @@ export class DbStorage implements IStorage {
 
   // Contact message methods
   async getContactMessage(id: number): Promise<ContactMessage | undefined> {
-    const result = await db.select().from(contactMessages).where(eq(contactMessages.id, id));
-    return result[0];
+    return this.contactMessagesStore.get(id);
   }
 
   async createContactMessage(insertMessage: InsertContactMessage): Promise<ContactMessage> {
-    const [message] = await db.insert(contactMessages).values(insertMessage).returning();
-    await this.sendEmail({
+    const id = this.messageCurrentId++;
+    const createdAt = new Date();
+    const isRead = false;
+    const message: ContactMessage = { ...insertMessage, id, createdAt, isRead };
+    this.contactMessagesStore.set(id, message);
+    this.sendEmail({
         to: 'mountainmixologyca@gmail.com',
         subject: 'New Contact Message',
-        text: `New contact message with the following details: ${JSON.stringify(message)}`,
-        type: 'contact',
-        sourceId: message.id
+        text: `New contact message with the following details: ${JSON.stringify(message)}`
     });
     return message;
   }
@@ -150,24 +168,12 @@ export class DbStorage implements IStorage {
     );
   }
 
-  private async sendEmail({ to, subject, text, type, sourceId }: { 
-    to: string; 
-    subject: string; 
-    text: string;
-    type: 'booking' | 'contact';
-    sourceId: number;
-  }) {
-    // Save notification to database
-    await db.insert(emailNotifications).values({
-      to,
-      subject,
-      content: text,
-      type,
-      sourceId
-    });
-
-    // Log for debugging
-    console.log(`Email notification saved for ${type} #${sourceId}`);
+  private async sendEmail({ to, subject, text }: { to: string; subject: string; text: string }) {
+    // For now this is just logging the email content
+    // You'll need to set up a proper email service
+    console.log(`Email would be sent to: ${to}`);
+    console.log(`Subject: ${subject}`);
+    console.log(`Content: ${text}`);
     return true;
   }
 
@@ -224,4 +230,4 @@ export class DbStorage implements IStorage {
   }
 }
 
-export const storage = new DbStorage();
+export const storage = new MemStorage();
