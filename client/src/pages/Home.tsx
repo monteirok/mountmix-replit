@@ -25,10 +25,10 @@ const Home = () => {
       <main>
         <Hero />
         <About />
-        <ParallaxBanner />
         <ServicesBanner />
         <SignatureCocktails />
         {/* <PackageOptions /> */}
+        <ParallaxBanner />
         <Gallery />
         {/* <Testimonials /> */}
         <BookingCTA />
