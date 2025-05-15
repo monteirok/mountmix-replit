@@ -139,8 +139,8 @@ const Hero = () => {
                   <div className="text-xs text-white/70 mt-1">{stat.label}</div>
                 </div>
               ))}
-            </motion.div>
-          </motion.div> */}
+            </motion.div> */}
+          </motion.div>
           
           {/* Image or Visual Component */}
           <motion.div
