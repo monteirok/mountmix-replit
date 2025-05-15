@@ -123,7 +123,7 @@ const Hero = () => {
             </motion.div>
 
             {/* Stats Display */}
-            <motion.div 
+            {/* <motion.div 
               className="grid grid-cols-3 gap-4 mt-12"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -140,7 +140,7 @@ const Hero = () => {
                 </div>
               ))}
             </motion.div>
-          </motion.div>
+          </motion.div> */}
           
           {/* Image or Visual Component */}
           <motion.div
