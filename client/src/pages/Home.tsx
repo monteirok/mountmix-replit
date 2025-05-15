@@ -5,9 +5,7 @@ import About from "@/components/About";
 import ParallaxBanner from "@/components/ParallaxBanner";
 import SignatureCocktails from "@/components/SignatureCocktails";
 import ServicesBanner from "@/components/ServicesBanner";
-import PackageOptions from "@/components/PackageOptions";
 import Gallery from "@/components/Gallery";
-import Testimonials from "@/components/Testimonials";
 import BookingCTA from "@/components/BookingCTA";
 import ContactSection from "@/components/ContactSection";
 import FaqSection from "@/components/FaqSection";
@@ -28,11 +26,11 @@ const Home = () => {
         <Hero />
         <About />
         <ParallaxBanner />
-        <SignatureCocktails />
         <ServicesBanner />
+        <SignatureCocktails />
         {/* <PackageOptions /> */}
         <Gallery />
-        <Testimonials />
+        {/* <Testimonials /> */}
         <BookingCTA />
         <ContactSection />
         <FaqSection />
